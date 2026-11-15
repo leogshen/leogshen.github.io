@@ -1,0 +1,48 @@
+media:
+  input: images/posts
+  output: /images/posts
+
+content:
+  - name: posts
+    label: Timeline Posts
+    type: collection
+    path: _posts
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{title}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: image
+        label: Main image
+        type: image
+        required: true
+        options:
+          rename: safe
+          extensions: [jpg, jpeg, png, webp]
+      - name: image_alt
+        label: Image description
+        type: string
+        description: Briefly describe the image for visitors using screen readers.
+      - name: body
+        label: Caption
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
+          switcher: false
